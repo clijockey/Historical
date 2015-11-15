@@ -1,0 +1,149 @@
+      export PWD=`pwd`
+        PS1=`uname -n`_'$LOGNAME # '
+        export PS1
+
+# Set up search paths
+
+        if [ -d $HOME/bin ]
+        then
+        export PATH=$PATH:$HOME/bin
+        fi
+
+        if [ -d /opt/tsg/bin ]
+        then
+        export PATH=$PATH:/opt/tsg/bin
+        fi
+
+        if [ -d /usr/local/bin ]
+        then
+        export PATH=$PATH:/usr/local/bin
+        fi
+
+        if [ -d /usr/openwin/bin ]
+        then
+        export PATH=$PATH:/usr/openwin/bin
+        fi
+
+        if [ -d /usr/ucb ]
+        then
+        export PATH=$PATH:/usr/ucb
+        fi
+
+        if [ -d /opt/SUNWspro/bin ]
+        then
+        export PATH=$PATH:/opt/SUNWspro/bin
+        fi
+
+        PATH=/usr/sbin:$PATH:$HOME:/usr/etc
+        export PATH
+
+# Set up default creation mask to 755 (directory) and 644 (files)
+        umask 022
+
+# Set up the shell environment
+        set -u
+        trap "echo 'logout'" 0
+
+# Prompt if terminal type is unknown
+        if [ "$TERM" = unknown ] ; then
+
+      export PWD=`pwd`
+        PS1=`uname -n`_'$LOGNAME # '
+        export PS1
+
+# Set up search paths
+        if [ -d $HOME/bin ]
+        then
+        export PATH=$PATH:$HOME/bin
+        fi
+
+        if [ -d /opt/tsg/bin ]
+        then
+        export PATH=$PATH:/opt/tsg/bin
+        fi
+
+        if [ -d /usr/local/bin ]
+        then
+        export PATH=$PATH:/usr/local/bin
+        fi
+
+        if [ -d /usr/openwin/bin ]
+        then
+        export PATH=$PATH:/usr/openwin/bin
+        fi
+
+        if [ -d /usr/ucb ]
+        then
+        export PATH=$PATH:/usr/ucb
+        fi
+
+        if [ -d /opt/SUNWspro/bin ]
+        then
+        export PATH=$PATH:/opt/SUNWspro/bin
+        fi
+
+
+        PATH=/usr/sbin:$PATH:$HOME:/usr/etc
+        export PATH
+
+# Set up default creation mask to 755 (directory) and 644 (files)
+        umask 022
+
+# Set up the shell environment
+        set -u
+        trap "echo 'logout'" 0
+
+# Prompt if terminal type is unknown
+        if [ "$TERM" = unknown ] ; then
+
+                echo "Please enter Terminal Type - \c"
+                read TERM
+                export TERM
+                echo
+        fi
+
+export EXSU=exsu
+export TMP=/tmp
+
+if [ `uname -r` = "B.10.20" ]
+then
+HISTFILE=$TMP/.sh_history.$LOGNAME
+export HISTFILE
+else
+HISTFILE=$HOME/.sh_history
+export HISTFILE
+fi
+
+
+HISTSIZE=1024
+export HISTSIZE
+
+echo "Checking DISPLAY variable."
+export HOSTNAME=`hostname`
+
+DISPLAY2=`who -mu | awk '{ print $8 }' | awk -F: '{ print $1 ":0" }'| sed 's/(//
+          s/)//'`
+
+if [ `uname -s` = "HP-UX" ]
+then
+xset -q > /dev/null 2>&1
+if [ "$?" != "0" ]
+then
+        export DISPLAY=$DISPLAY2
+        xset -q > /dev/null 2>&1
+        if [ "$?" != "0" ]
+        then
+                DISPLAY=""
+        fi
+fi
+else
+        export DISPLAY=$DISPLAY2
+fi
+
+if [ -z "$DISPLAY" ]
+then
+        echo "Unable to set DISPLAY value.\n\n"
+        unset DISPLAY
+else
+        echo "Display set to \"$DISPLAY\"\n\n"
+fi

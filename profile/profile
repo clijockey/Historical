@@ -1,0 +1,22 @@
+########### Source global definitions ################
+if [ -f /etc/bashrc ]; then
+. /etc/bashrc
+fi
+############# set the prompt ##########################
+# uncomment out 1 and only one below....
+# this is hostname and time
+#PS1="\h-(\@): "
+# this is hostname and history number
+#PS1="\h-(\!)# "
+# this is hostname and current working directory
+PS1="\h-(\w)# "
+# this is hostname and shortened current working directory
+#PS1="\h-(\W)# "
+############# path manipulation #######################
+# add ~/bin to the path, cwd as well
+PATH="$PATH:$HOME/bin:./"
+################# env variables #######################
+
+export PATH
+unset USERNAME
+###### User specific aliases and functions ############
